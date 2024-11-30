@@ -1,0 +1,84 @@
+<div class="container mt-5">
+    <div class="d-flex justify-content-between">
+        <h2>Employee List</h2>
+        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Employee</button>
+    </div>
+  
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Employee Name</th>
+          <th>Contact No</th>
+          <th>Email</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (employee of employees; track $index) {
+        <tr >
+            <td> {{employee.name}} </td>
+            <td>{{employee.contact}}</td>
+            <td>{{employee.email}}</td>
+            <td>{{employee.address}} </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">ADD EMPLOYEE PAGE</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" id="btn-close" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="addEmployeeForm">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Employee Name</label>
+                  <input name="name" formControlName="name" type="text" id="name" class="form-control" placeholder="Enter employee name"/>
+                  @if(addEmployeeForm.get('name')?.errors && addEmployeeForm.get('name')?.touched){
+                    <div class="text-danger small">
+                        Employee name is required.
+                    </div>
+                  }
+                </div>
+                <div class="mb-3">
+                  <label for="contact" class="form-label">Contact No</label>
+                  <input name="contact" formControlName="contact" type="text" id="contact" class="form-control" placeholder="Enter contact number"/>
+                  @if(addEmployeeForm.get('contact')?.errors && addEmployeeForm.get('contact')?.touched){
+                    <div class="text-danger small">
+                        Valid contact number is required.
+                      </div>
+                  }
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input name="email" formControlName="email" type="email" id="email" class="form-control"placeholder="Enter email"/>
+                  @if(addEmployeeForm.get('email')?.errors && addEmployeeForm.get('email')?.touched){
+                    <div class="text-danger small">
+                        Valid email is required.
+                    </div>
+                  }
+                </div>
+                <div class="mb-3">
+                  <label for="address" class="form-label">Address</label>
+                  <input name="address" formControlName="address" type="text" id="address" class="form-control" placeholder="Enter address"/>
+                  @if(addEmployeeForm.get('address')?.errors && addEmployeeForm.get('address')?.touched){
+                    <div class="text-danger small">
+                        Address is required.
+                    </div>
+                  }
+                </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button (click)="addEmployeeDetails()" type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
